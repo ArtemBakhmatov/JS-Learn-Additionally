@@ -1,15 +1,33 @@
-const vehicleBodyWidth = 5000,
-     vehicleBodyLength = 4000;
+const arr = [1, 2, 3];
+console.log(arr[1]); // 2
 
-console.log('Ширина кузова автомобиля: ' + vehicleBodyWidth + ', длина: ' + vehicleBodyLength);
-// ['sdff', 'fsfwff', 'sdffffd'].map(a => )
-// Request
-/* data
-   response */
+const arr1 = ['a', 'b', 'c'];
 
-// snake_case (название папок и файлов кроме переменных в JS)
-// UPPER_SNAKE_CASE (перем-е в верхнем регис-е в нижним _ , в JS появляются в виде констант)
-// например : const COLOR_RED = '#F00'
-// Kebab-case (название папок и файлов кроме переменных в JS)
-// PascalCase (название классов в JS)
+const arrObj = {
+	a: 1,
+	1: 2,
+	2: 3,
+	abc: {
+		df: [{}, {}],
+		def: {
 
+		}
+	}
+};
+console.log(arrObj.a); // так правильно будет (клуч это строка)
+console.log(arrObj[1]) // если ключ ввиде цыфры то вызываем ввиде массива
+
+arrObj.b = '1234';    // в объект добавляем новый ключ b со значением '1234' 
+console.log(arrObj['b']); // если хотим получить новый ключ, он должен быть ввиде массива , ключ в ковычках
+console.log(arrObj.b); // если этот ключ вызываем дважды , то можно через точку, т.к JS понимает что это ключ
+
+//arrObj['b'] = '1234'; так ключи безопаснее создавать (вызывать можно так: arrObj.b)
+//const obj = {a: 1, b: 2};
+
+const obj = {
+	'Anna': 500,
+	'Alice': 800
+};
+['Anna', 500, 'Alice', 800]
+
+// массивы - перечень ифоормации по порядку
