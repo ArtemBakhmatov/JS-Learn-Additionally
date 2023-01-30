@@ -1,42 +1,32 @@
-const usdCurr = 28;
-const discount = 0.9;
+'use strict';
 
-function convert(amount, curr) {
-	return curr * amount; 
-	// console.log(1); // Работать не будет, после return код останавливается
+const box = document.querySelector('.box');
+
+const newHeight = 100;
+const newWidth = 400;
+
+function changeParams(elem, h, w) {
+    elem.style.height = `${h || 200}px`;
+    elem.style.width = `${w || 200}px`;
+    //elem.innerHTML = h ?? 200 * w ?? 200; // Тут сначала выполнится умножение , т.к. приоритет выше
+    elem.innerHTML = (h ?? 200) * (w ?? 200); // Сначала скобки а потом умножение
 }
 
-function promotion(result) {
-	console.log(result * discount);
-	//return undefined; он выполняется внутри JS, не видно нам
-}
+changeParams(box, newHeight, newWidth);
 
-const res = convert(500, usdCurr);
-promotion(res);
+// let userName;
+// console.log(userName ?? 'User');  // User // ?? -> Работает только с null или undefined
 
-///////////////////////////////////////////////////////////////////////////////
-function test() {
-	for (let i = 0; i < 5; i++) {
-		console.log(i);
-		if (i === 3) {
-			return;
-		}
-	}
-	console.log('Done'); // не сработает так как return останавливает код
-}
+// let userName = null;
+// console.log(userName ?? 'User');  // User // ?? -> Работает только с null или undefined
 
-test();
+// let userName = 0;
+// console.log(userName ?? 'User');  // ответ будтет 0
 
-///////////////////////////////////////////////////////////////////////////////
+// let userName = NaN;
+// console.log(userName ?? 'User');  // ответ будтет NaN
 
-function doNothing() {};
-console.log(doNothing() === undefined);  // true
+let userName;
+let userKey;
 
-///////////////////////////////////////////////////////////////////////////////
-// Консоль разработчика
-
-// > console.log('11'); // console -> это объект, .log() -> это метод
-//  11    // выводи в консоль значение, и т.к console.log() это функция, значит она далжна что то возвращать
-// < undefined  // возрвщает undefined, так будет с любой функцией в котором нет return
-
-// Важно: после return код переность нельзя вниз, внутри JS будет выглядеть так: return;
+console.log(userName ?? userKey ?? 'User'); // User
