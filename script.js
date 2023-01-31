@@ -1,32 +1,41 @@
 'use strict';
 
 const box = document.querySelector('.box');
+const block = document.querySelector('.block');
 
-const newHeight = 100;
-const newWidth = 400;
+console.log(block); // null
 
-function changeParams(elem, h, w) {
-    elem.style.height = `${h || 200}px`;
-    elem.style.width = `${w || 200}px`;
-    //elem.innerHTML = h ?? 200 * w ?? 200; // Тут сначала выполнится умножение , т.к. приоритет выше
-    elem.innerHTML = (h ?? 200) * (w ?? 200); // Сначала скобки а потом умножение
+// оператор ? отвечает существует ли данный элемент, если не то будет undefined
+
+// console.log(block.textContent); // будет ошибка и код дальше небудет работать
+
+// if(block) {
+//     console.log(block.textContent); 
+// }
+
+// через условие код не сломается будет дальше работь вниз
+
+//console.log(block?.textContent);   // undefined
+//block?.textContent = '123'; // Будет ошибка так как изначально undefined
+
+console.log(1 + 2);
+
+const userData = {
+    name: 'Ivan',
+    age: null,
+    say: function() {
+        console.log('Hello!');
+    }
 }
 
-changeParams(box, newHeight, newWidth);
+userData.say(); // код работает
+//userData.hey(); // Будет ошибка , такого метода не сущ-ет
+userData.hey?.(); // Ошибки не будет
 
-// let userName;
-// console.log(userName ?? 'User');  // User // ?? -> Работает только с null или undefined
+//console.log(userData.skills.js); // будет ошибка
 
-// let userName = null;
-// console.log(userName ?? 'User');  // User // ?? -> Работает только с null или undefined
+// if(userData && userData.skills && userData.skills.js) {
+//     console.log(userData.skills.js); // ошибки не будет так как условие не сработает
+// }
 
-// let userName = 0;
-// console.log(userName ?? 'User');  // ответ будтет 0
-
-// let userName = NaN;
-// console.log(userName ?? 'User');  // ответ будтет NaN
-
-let userName;
-let userKey;
-
-console.log(userName ?? userKey ?? 'User'); // User
+console.log(userData.skills?.js);  // undefined
