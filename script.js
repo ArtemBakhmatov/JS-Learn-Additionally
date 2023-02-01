@@ -1,41 +1,42 @@
 'use strict';
 
-const box = document.querySelector('.box');
-const block = document.querySelector('.block');
+const boxesQuery = document.querySelectorAll('.box');
+const boxesGet = document.getElementsByClassName('box');
 
-console.log(block); // null
+console.log(boxesQuery); // NodeList(3) [div.box, div.box, div.box] -> Узлы (она более полезнее)
+console.log(boxesGet);   // HTMLCollection(3) [div.box, div.box, div.box] -> элементы
+//console.log(document.body.children); // HTMLCollection(4) [div.box, div.box, div.box, script] -> Все дети
 
-// оператор ? отвечает существует ли данный элемент, если не то будет undefined
+boxesQuery[0].remove();
+boxesGet[0].remove();
 
-// console.log(block.textContent); // будет ошибка и код дальше небудет работать
+console.log(boxesQuery); // NodeList(3) [div.box, div.box, div.box] статичное изменение
+console.log(boxesGet);   // HTMLCollection [div.box] текущее изменение
 
-// if(block) {
-//     console.log(block.textContent); 
-// }
+console.log(Array.from(boxesGet));  // [div.box]
 
-// через условие код не сломается будет дальше работь вниз
-
-//console.log(block?.textContent);   // undefined
-//block?.textContent = '123'; // Будет ошибка так как изначально undefined
-
-console.log(1 + 2);
-
-const userData = {
-    name: 'Ivan',
-    age: null,
-    say: function() {
-        console.log('Hello!');
-    }
+for (let i = 0; i < 5; i++) {
+    const div = document.createElement('div');
+    div.classList.add('box');
+    document.body.append(div);
 }
 
-userData.say(); // код работает
-//userData.hey(); // Будет ошибка , такого метода не сущ-ет
-userData.hey?.(); // Ошибки не будет
+console.log(boxesQuery); // NodeList(3) [div.box, div.box, div.box]
+console.log(boxesGet);   // HTMLCollection(6) [div.box, div.box, div.box, div.box, div.box, div.box]
 
-//console.log(userData.skills.js); // будет ошибка
+///////////////////////////////////////////////////////////////////////////////
 
-// if(userData && userData.skills && userData.skills.js) {
-//     console.log(userData.skills.js); // ошибки не будет так как условие не сработает
-// }
+boxesQuery.forEach(box => {
+    if (box.matches('.this')) {
+        console.log(box);  // <div class="box this"></div>
+    }
+});
 
-console.log(userData.skills?.js);  // undefined
+
+// <div class="wrapper">
+    //<div class="box"></div>
+    //<div class="box this"></div>
+    //<div class="box"></div>
+// </div>
+
+//console.log(boxesQuery[0].closest('.wrapper')); выведем блок wrapper
