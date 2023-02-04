@@ -1,42 +1,64 @@
-'use strict';
+/* 
+1)   Напишите однострочное решение, которое вычисляет сумму квадратных корней для всех чётных чисел целочисленного массива. 
+*/
 
-const boxesQuery = document.querySelectorAll('.box');
-const boxesGet = document.getElementsByClassName('box');
-
-console.log(boxesQuery); // NodeList(3) [div.box, div.box, div.box] -> Узлы (она более полезнее)
-console.log(boxesGet);   // HTMLCollection(3) [div.box, div.box, div.box] -> элементы
-//console.log(document.body.children); // HTMLCollection(4) [div.box, div.box, div.box, script] -> Все дети
-
-boxesQuery[0].remove();
-boxesGet[0].remove();
-
-console.log(boxesQuery); // NodeList(3) [div.box, div.box, div.box] статичное изменение
-console.log(boxesGet);   // HTMLCollection [div.box] текущее изменение
-
-console.log(Array.from(boxesGet));  // [div.box]
-
-for (let i = 0; i < 5; i++) {
-    const div = document.createElement('div');
-    div.classList.add('box');
-    document.body.append(div);
-}
-
-console.log(boxesQuery); // NodeList(3) [div.box, div.box, div.box]
-console.log(boxesGet);   // HTMLCollection(6) [div.box, div.box, div.box, div.box, div.box, div.box]
-
-///////////////////////////////////////////////////////////////////////////////
-
-boxesQuery.forEach(box => {
-    if (box.matches('.this')) {
-        console.log(box);  // <div class="box this"></div>
+/* 
+const arr = [1, 4, 6, 5, 8, 2, 9];
+//const evenNumbers = arr.filter(element => !(element % 2)); // выводим четные числа
+const evenNumbers = [];
+for(let i = 0; i < arr.length; i++) {
+    if(arr[i] % 2 === 0) {
+        evenNumbers.push(arr[i]);
     }
-});
+}
+console.log(evenNumbers); // [ 4, 6, 8, 2 ]
 
+let answer = evenNumbers.reduce((calculator, element) => calculator + Math.sqrt(element), 0).toFixed();
+console.log(answer); // 9 
+*/
 
-// <div class="wrapper">
-    //<div class="box"></div>
-    //<div class="box this"></div>
-    //<div class="box"></div>
-// </div>
+///////////// Собеседования на JavaScript. Как не облажаться? //////////////////
 
-//console.log(boxesQuery[0].closest('.wrapper')); выведем блок wrapper
+// Filter 
+const filterThis = [2, 4, 3, 6, 8, 9];
+
+const filter = (arr, func) => {
+    const filteredArr = [];
+    for (let elem of arr) {
+        if (func(elem)) {
+            filteredArr.push(elem);
+        }
+    }
+    return filteredArr;
+};
+
+console.log(filter(filterThis, (elem) => elem % 3 === 0)); // [ 3, 6, 9 ]
+
+// some
+const someOfThis = ['Java', 'JavaScript', 'Python'];
+
+const some = (arr, func) => {
+    for (let elem of arr) {
+        if (func(elem)) {
+            return true;
+        }
+    }
+    return false;
+};
+
+console.log(some(someOfThis, (elem) => elem === 'Java')); // true
+
+// метод .some() -> возвращает булиновое значение
+
+// map
+const mapMe = [1000, 800, 2400, 500];
+
+const map = (arr, func) => {
+    const mappedArr = [];
+    for (let elem of arr) {
+        mappedArr.push(func(elem));
+    }
+    return mappedArr;
+};
+
+console.log(map(mapMe, (elem) => elem + 200));  // [ 1200, 1000, 2600, 700 ]
