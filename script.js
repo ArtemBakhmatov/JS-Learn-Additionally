@@ -1,64 +1,38 @@
-/* 
-1)   Напишите однострочное решение, которое вычисляет сумму квадратных корней для всех чётных чисел целочисленного массива. 
-*/
+// Тип данных Symbol -> они должны для того чтобы создавать уникальные индификаторы, чем они и являются
+// Symbol-ы они будут уникальны и неизменяемы, применяем к свойствам объекта
 
 /* 
-const arr = [1, 4, 6, 5, 8, 2, 9];
-//const evenNumbers = arr.filter(element => !(element % 2)); // выводим четные числа
-const evenNumbers = [];
-for(let i = 0; i < arr.length; i++) {
-    if(arr[i] % 2 === 0) {
-        evenNumbers.push(arr[i]);
+const obj = {
+    'name': 'Test',
+    [Symbol('id')]: 1,
+    getId: function() {
+        return this[id];
     }
-}
-console.log(evenNumbers); // [ 4, 6, 8, 2 ]
+};
 
-let answer = evenNumbers.reduce((calculator, element) => calculator + Math.sqrt(element), 0).toFixed();
-console.log(answer); // 9 
+console.log(obj[Object.getOwnPropertySymbols(obj)[0]]);
+
+for(let value of obj) console.log(value); 
 */
 
-///////////// Собеседования на JavaScript. Как не облажаться? //////////////////
+// let id = Symbol('id');
+// let id2 = Symbol('id');
 
-// Filter 
-const filterThis = [2, 4, 3, 6, 8, 9];
+// console.log(id === id2); // false
+// obj[id] = 1;
 
-const filter = (arr, func) => {
-    const filteredArr = [];
-    for (let elem of arr) {
-        if (func(elem)) {
-            filteredArr.push(elem);
-        }
-    }
-    return filteredArr;
+// console.log(obj[id]); // 1
+
+//console.log(obj.getId()); 
+
+const myAwesomeDB = {
+    movies: [],
+    actors: [],
+    [Symbol('id')]: 123
 };
 
-console.log(filter(filterThis, (elem) => elem % 3 === 0)); // [ 3, 6, 9 ]
+// Сторонний код библиотеки 
 
-// some
-const someOfThis = ['Java', 'JavaScript', 'Python'];
-
-const some = (arr, func) => {
-    for (let elem of arr) {
-        if (func(elem)) {
-            return true;
-        }
-    }
-    return false;
-};
-
-console.log(some(someOfThis, (elem) => elem === 'Java')); // true
-
-// метод .some() -> возвращает булиновое значение
-
-// map
-const mapMe = [1000, 800, 2400, 500];
-
-const map = (arr, func) => {
-    const mappedArr = [];
-    for (let elem of arr) {
-        mappedArr.push(func(elem));
-    }
-    return mappedArr;
-};
-
-console.log(map(mapMe, (elem) => elem + 200));  // [ 1200, 1000, 2600, 700 ]
+myAwesomeDB.db = '325635225';
+console.log(myAwesomeDB["id"]);
+console.log(myAwesomeDB);
